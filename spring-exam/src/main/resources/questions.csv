@@ -1,0 +1,11 @@
+Question;Answer1;Answer2;Answer3;Answer4;Correct
+Most often, when people say Spring, they're referring to what?;The Spring Framework;The Spring Data project;The Spring eco-system;The Spring Boot project;3
+What is the name of the project that started Spring?;The Spring JDBC project;The Spring Framework;The Spring project;The Spring Boot project;2
+Which project greatly simplified development of Spring-based applications;Spring Boot;Spring Data;Spring Microservices;Spring Framework;1
+Which of the Spring projects takes an opinionated view of Spring to make development quick and easy?;Spring Boot;Spring Data;Spring Cloud;Spring Core;1
+Which feature of Spring Boot provides a best-guess configuration for an application?;Auto-configurations;Config-less configurations;Helpful configurations;Config-free configurations;1
+"What does ""Spring Boot takes an opinionated view of Spring"" mean?";Your application will be completely configuration-free;The number of ways to accomplish things will be restircted;Sensisble defaults out of the box;The most performant applications;3
+Which of the following is covered by the Spring Framework?;Batch processing;Message processing;Web;Cloud;3
+Which Spring Framework module is responsible for helping solve cross-cutting concerns?;Spring AOP;Spring Core;Spring Integration;Spring Data Access;1
+Which Spring Framework area helps make it easier to interact with other applications and systems?;Spring Data;Spring Integration;Spring Social;Spring Collab;2
+Which design principle advocated within the Spring Framework helps testing?;Modularization;Blockchain;Dependency injection;Auto-configuration;3
