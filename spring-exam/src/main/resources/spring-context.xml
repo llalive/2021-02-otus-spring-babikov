@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="questionDao" class="dev.lochness.springexam.dao.QuestionDaoCSV">
+        <constructor-arg name="questionsResourceName" value="questions.csv"/>
+        <constructor-arg name="numberOfAnswers" value="4"/>
+    </bean>
+
+    <bean id="questionService" class="dev.lochness.springexam.service.QuestionServiceImpl">
+        <constructor-arg name="dao" ref="questionDao"/>
+        <constructor-arg name="numberOfQuestions" value="5"/>
+    </bean>
+</beans>
