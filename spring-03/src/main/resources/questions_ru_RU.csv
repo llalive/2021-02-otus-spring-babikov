@@ -1,0 +1,11 @@
+Question;Answer1;Answer2;Answer3;Answer4;Correct
+Наиболее часто, когда упоминается Spring, что имеется ввиду?;The Spring Framework;The Spring Data project;The Spring eco-system;The Spring Boot project;3
+Как назывался проект, положивший начало Spring?;The Spring JDBC project;The Spring Framework;The Spring project;The Spring Boot project;2
+Какой проект значительно упрощает разработку Spring-based приложений?;Spring Boot;Spring Data;Spring Microservices;Spring Framework;1
+Какой из проектов Spring предоставляет альтернативный взгляд на Spring, чтобы сделать разработку быстрой и простой?;Spring Boot;Spring Data;Spring Cloud;Spring Core;1
+Какая возможность Spring Boot делает конфигурация приложения оптимальной?;Auto-configurations;Config-less configurations;Helpful configurations;Config-free configurations;1
+"Что обозначает выражение ""Spring Boot takes an opinionated view of Spring""?";Приложение не требует конфигурации;Количество возможных путей реализации будет ограничено;"Оптимальные настройки ""из коробки""";Наиболее производительные приложения;3
+Какой функционал покрывает Spring Framework?;Пакетная обработка;Обработка сообщений;Web;Cloud;3
+Какой модуль Spring Framework в ответе за разрешение сквозных проблем?;Spring AOP;Spring Core;Spring Integration;Spring Data Access;1
+Какая область Spring Framework упрощает взаимодействие между приложением и системой?;Spring Data;Spring Integration;Spring Social;Spring Collab;2
+Какой принцип разработки, поддерживаемый в Spring Framework, помогает в тестировании?;Modularization;Blockchain;Dependency injection;Auto-configuration;3
