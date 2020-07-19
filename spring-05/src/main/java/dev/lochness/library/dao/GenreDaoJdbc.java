@@ -20,7 +20,7 @@ public class GenreDaoJdbc implements GenreDao {
 
     @Override
     public int count() {
-        return jdbc.getJdbcOperations().queryForObject("SELECT count(*) FROM Genres",
+        return jdbc.getJdbcOperations().queryForObject("SELECT count(genreId) FROM Genres",
                 Integer.class);
     }
 
@@ -38,18 +38,18 @@ public class GenreDaoJdbc implements GenreDao {
 
     @Override
     public Genre getById(Integer id) {
-        return jdbc.queryForObject("SELECT * FROM Genres WHERE GenreId = :id",
+        return jdbc.queryForObject("SELECT genreId, name FROM Genres WHERE GenreId = :id",
                 Map.of("id", id), new GenreMapper());
     }
 
     @Override
     public List<Genre> getAll() {
-        return jdbc.query("SELECT * FROM Genres", new GenreMapper());
+        return jdbc.query("SELECT genreId, name FROM Genres", new GenreMapper());
     }
 
     @Override
     public List<Genre> getGenresForBook(long bookId) {
-        return jdbc.query("SELECT g.* FROM Genres g RIGHT JOIN BookGenres bg " +
+        return jdbc.query("SELECT g.genreId, g.name FROM Genres g RIGHT JOIN BookGenres bg " +
                         "ON g.genreId = bg.genreId " +
                         "WHERE bg.bookId = :bookId",
                 Map.of("bookId", bookId), new GenreMapper());

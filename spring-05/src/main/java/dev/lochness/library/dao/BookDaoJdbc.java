@@ -22,7 +22,7 @@ public class BookDaoJdbc implements BookDao {
 
     @Override
     public int count() {
-        return jdbc.getJdbcOperations().queryForObject("SELECT COUNT(*) FROM Books",
+        return jdbc.getJdbcOperations().queryForObject("SELECT COUNT(bookId) FROM Books",
                 Integer.class);
     }
 
@@ -66,32 +66,32 @@ public class BookDaoJdbc implements BookDao {
 
     @Override
     public Book getById(long id) {
-        return jdbc.queryForObject("SELECT * FROM Books WHERE bookId = :id",
+        return jdbc.queryForObject("SELECT bookId, title, ISBN FROM Books WHERE bookId = :id",
                 Map.of("id", id), new BookMapper());
     }
 
     @Override
     public List<Book> getAll() {
-        return jdbc.query("SELECT * FROM Books", new BookMapper());
+        return jdbc.query("SELECT bookId, title, ISBN FROM Books", new BookMapper());
     }
 
     @Override
     public List<Book> getByAuthorId(long authorId) {
-        return jdbc.query("SELECT b.* FROM Books b RIGHT JOIN BookAuthors ba " +
+        return jdbc.query("SELECT b.bookId, b.title, b.ISBN FROM Books b RIGHT JOIN BookAuthors ba " +
                 "ON b.BookId = ba.BookId " +
                 "WHERE ba.AuthorId = :author", Map.of("author", authorId), new BookMapper());
     }
 
     @Override
     public List<Book> getByGenre(int genreId) {
-        return jdbc.query("SELECT b.* FROM Books b RIGHT JOIN BookGenres bg " +
+        return jdbc.query("SELECT b.bookId, b.title, b.ISBN FROM Books b RIGHT JOIN BookGenres bg " +
                 "ON b.BookId = bg.BookId " +
                 "WHERE bg.GenreId = :genre", Map.of("genre", genreId), new BookMapper());
     }
 
     @Override
     public List<Book> search(String substring) {
-        return jdbc.query("SELECT * FROM Books WHERE title LIKE '%'||:title||'%'",
+        return jdbc.query("SELECT bookId, title, ISBN FROM Books WHERE title LIKE '%'||:title||'%'",
                 Map.of("title", substring), new BookMapper());
     }
 

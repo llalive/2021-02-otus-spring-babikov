@@ -20,7 +20,7 @@ public class AuthorDaoJdbc implements AuthorDao {
 
     @Override
     public int count() {
-        return jdbc.getJdbcOperations().queryForObject("SELECT count(*) FROM Authors",
+        return jdbc.getJdbcOperations().queryForObject("SELECT count(authorId) FROM Authors",
                 Integer.class);
     }
 
@@ -39,18 +39,18 @@ public class AuthorDaoJdbc implements AuthorDao {
 
     @Override
     public List<Author> getAll() {
-        return jdbc.query("SELECT * FROM Authors", new AuthorMapper());
+        return jdbc.query("SELECT authorId, firstName, lastName FROM Authors", new AuthorMapper());
     }
 
     @Override
     public Author getById(long id) {
-        return jdbc.queryForObject("SELECT * FROM Authors WHERE authorId = :id",
+        return jdbc.queryForObject("SELECT authorId, firstName, lastName FROM Authors WHERE authorId = :id",
                 Map.of("id", id), new AuthorMapper());
     }
 
     @Override
     public List<Author> getAuthorsForBook(long bookId) {
-        return jdbc.query("SELECT a.* FROM Authors a RIGHT JOIN BookAuthors ba " +
+        return jdbc.query("SELECT a.authorId, a.firstName, a.lastName FROM Authors a RIGHT JOIN BookAuthors ba " +
                         "ON a.authorId = ba.authorId " +
                         "WHERE ba.bookId = :bookId",
                 Map.of("bookId", bookId), new AuthorMapper());
