@@ -54,17 +54,25 @@ public class LibraryInterfaceCommands {
 
     @ShellMethod(value = "Add book to library", key = {"add book", "ab"})
     public void addBook(@ShellOption String title, @ShellOption(defaultValue = "-") String ISBN) {
-        service.addBook(new Book(title, ISBN));
+        service.addBook(Book.builder()
+                .title(title)
+                .isbn(ISBN)
+                .build());
     }
 
     @ShellMethod(value = "Add new genre", key = {"add genre", "ag"})
     public void addGenre(@ShellOption String name) {
-        service.addGenre(new Genre(name));
+        service.addGenre(Genre.builder()
+                .name(name)
+                .build());
     }
 
     @ShellMethod(value = "Add new author", key = {"add author", "aa"})
     public void addAuthor(@ShellOption String firstName, @ShellOption String lastName) {
-        service.addAuthor(new Author(firstName, lastName));
+        service.addAuthor(Author.builder()
+                .firstName(firstName)
+                .lastName(lastName)
+                .build());
     }
 
     @ShellMethod(value = "Delete book from library", key = {"delete book", "db"})

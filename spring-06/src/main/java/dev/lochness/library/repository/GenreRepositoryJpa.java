@@ -3,15 +3,14 @@ package dev.lochness.library.repository;
 import dev.lochness.library.domain.Genre;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.transaction.Transactional;
 import java.util.List;
 
-@Transactional
 @Repository
 public class GenreRepositoryJpa implements GenreRepository {
 
@@ -38,10 +37,8 @@ public class GenreRepositoryJpa implements GenreRepository {
 
     @Override
     public void deleteGenreById(Long id) {
-        Query query =
-                em.createQuery("DELETE FROM Genre g WHERE g.id = :id");
-        query.setParameter("id", id);
-        query.executeUpdate();
+        Genre genre = em.find(Genre.class, id);
+        em.remove(genre);
     }
 
     @Override
@@ -51,7 +48,9 @@ public class GenreRepositoryJpa implements GenreRepository {
 
     @Override
     public List<Genre> findAll() {
-        return em.createQuery("SELECT g FROM Genre g " +
-                "LEFT JOIN g.books ", Genre.class).getResultList();
+        EntityGraph<?> entityGraph = em.createEntityGraph("genre-book-entity-graph");
+        TypedQuery<Genre> query = em.createQuery("SELECT a FROM Genre a", Genre.class);
+        query.setHint("javax.persistence.fetchgraph", entityGraph);
+        return query.getResultList();
     }
 }

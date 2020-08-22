@@ -6,8 +6,6 @@ import dev.lochness.library.domain.Comment;
 import dev.lochness.library.domain.Genre;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class ConsolePrinter implements Printer {
 

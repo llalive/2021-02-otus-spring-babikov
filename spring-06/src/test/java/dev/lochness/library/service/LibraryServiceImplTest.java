@@ -6,16 +6,14 @@ import dev.lochness.library.domain.Comment;
 import dev.lochness.library.domain.Genre;
 import dev.lochness.library.io.Printer;
 import dev.lochness.library.repository.BookRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,7 +24,6 @@ import static org.mockito.Mockito.verify;
 
 @SpringBootTest
 @DisplayName("Class LibraryServiceImpl")
-@Transactional
 class LibraryServiceImplTest {
 
     private static final String TEST_BOOK_TITLE = "Test book";
@@ -71,8 +68,10 @@ class LibraryServiceImplTest {
     @Test
     @DirtiesContext
     void shouldAddBooksCorrectly() {
-        Book book = new Book(0L, TEST_BOOK_TITLE, TEST_BOOK_ISBN,
-                new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        Book book = Book.builder()
+                .title(TEST_BOOK_TITLE)
+                .isbn(TEST_BOOK_ISBN)
+                .build();
         service.addBook(book);
         Book addedBook = bookRepository.findBookById(2);
         assertAll("Title and isbn are same",
@@ -89,6 +88,7 @@ class LibraryServiceImplTest {
 
     @Test
     @DirtiesContext
+    @Transactional
     void shouldSetBookGenresCorrectly() {
         service.setBookGenres(1, List.of(1L, 3L));
         Book book = bookRepository.findBookById(1);
@@ -101,8 +101,10 @@ class LibraryServiceImplTest {
     @DirtiesContext
     void shouldSetBookAuthorsCorrectly() {
         Author author =
-                service.addAuthor(new Author(0L, TEST_AUTHOR_FIRST_NAME, TEST_AUTHOR_LAST_NAME,
-                        new ArrayList<>()));
+                service.addAuthor(Author.builder()
+                        .firstName(TEST_AUTHOR_FIRST_NAME)
+                        .lastName(TEST_AUTHOR_LAST_NAME)
+                        .build());
         service.setBookAuthors(1, List.of(author.getId()));
         Book book = bookRepository.findBookById(1L);
         assertEquals(2L, book.getAuthors().get(0).getId());
@@ -120,6 +122,7 @@ class LibraryServiceImplTest {
 
     @Test
     @DirtiesContext
+    @Transactional
     void shouldCorrectlyAddCommentsForBook() {
         service.addComment(1L, new Comment(0L, COMMENT_AUTHOR, COMMENT_TEXT));
         Book book = bookRepository.findBookById(1);

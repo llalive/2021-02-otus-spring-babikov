@@ -28,8 +28,6 @@ class BookRepositoryJpaTest {
     private static final String TEST_AUTHOR_LAST_NAME = "Чехов";
     private static final String TEST_GENRE_NAME = "фэнтези";
     private static final String DEFAULT_BOOK_TITLE = "Молчание ягнят";
-    private static final int DEFAULT_BOOK_GENRE = 6;
-    private static final long DEFAULT_BOOK_AUTHOR = 1;
     private static final long DEFAULT_BOOK_ID = 1L;
     private static final int EXPECTED_NUMBER_OF_BOOKS = 1;
     private static final long EXPECTED_ADDED_BOOK_ID = 2L;
@@ -48,7 +46,10 @@ class BookRepositoryJpaTest {
     @Test
     @DirtiesContext
     void addedBookShouldBeSetCorrectly() {
-        Book addedBook = bookRepository.saveBook(new Book(TEST_BOOK_TITLE, TEST_BOOK_ISBN));
+        Book addedBook = bookRepository.saveBook(Book.builder()
+                .title(TEST_BOOK_TITLE)
+                .isbn(TEST_BOOK_ISBN)
+                .build());
         Book book = em.find(Book.class, EXPECTED_ADDED_BOOK_ID);
         assertThat(addedBook).isNotNull().isEqualToComparingFieldByField(book);
     }
@@ -60,7 +61,10 @@ class BookRepositoryJpaTest {
         expected.setTitle(TEST_BOOK_TITLE);
         expected.setIsbn(TEST_BOOK_ISBN);
         List<Author> authors = new ArrayList<>();
-        authors.add(new Author(0L, TEST_AUTHOR_FIRST_NAME, TEST_AUTHOR_LAST_NAME, new ArrayList<>()));
+        authors.add(Author.builder()
+                .firstName(TEST_AUTHOR_FIRST_NAME)
+                .lastName(TEST_AUTHOR_LAST_NAME)
+                .build());
         expected.setAuthors(authors);
         expected.getGenres().add(new Genre(0L, TEST_GENRE_NAME, new ArrayList<>()));
         bookRepository.saveBook(expected);
@@ -84,20 +88,11 @@ class BookRepositoryJpaTest {
     @Test
     @DirtiesContext
     void shouldReturnAllBooksInLibrary() {
-        bookRepository.saveBook(new Book(TEST_BOOK_TITLE, TEST_BOOK_ISBN));
+        bookRepository.saveBook(Book.builder()
+                .title(TEST_BOOK_TITLE)
+                .isbn(TEST_BOOK_ISBN)
+                .build());
         List<Book> books = bookRepository.findAll();
         assertEquals(2, books.size());
-    }
-
-    @Test
-    void shouldReturnCorrectListOfBooksByAuthor() {
-        List<Book> books = bookRepository.findBooksByAuthorId(DEFAULT_BOOK_AUTHOR);
-        assertEquals(1, books.get(0).getId());
-    }
-
-    @Test
-    void shouldReturnCorrectListOfBooksByGenre() {
-        List<Book> books = bookRepository.findBooksByGenreId(DEFAULT_BOOK_GENRE);
-        assertEquals(1, books.get(0).getId());
     }
 }

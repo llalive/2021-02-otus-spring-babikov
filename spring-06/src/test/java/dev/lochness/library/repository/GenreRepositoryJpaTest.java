@@ -32,7 +32,9 @@ class GenreRepositoryJpaTest {
     @Test
     @DirtiesContext
     void shouldAddGenreCorrectly() {
-        Genre genre = genreRepository.saveGenre(new Genre(TEST_GENRE_NAME));
+        Genre genre = genreRepository.saveGenre(Genre.builder()
+                .name(TEST_GENRE_NAME)
+                .build());
         assertEquals(TEST_GENRE_NAME, genre.getName());
     }
 

@@ -14,8 +14,4 @@ public interface BookRepository {
     Book findBookById(long id);
 
     List<Book> findAll();
-
-    List<Book> findBooksByAuthorId(long authorId);
-
-    List<Book> findBooksByGenreId(long genreId);
 }

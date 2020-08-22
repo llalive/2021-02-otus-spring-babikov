@@ -3,16 +3,12 @@ package dev.lochness.library.repository;
 import dev.lochness.library.domain.Author;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Transactional
 @Repository
 public class AuthorRepositoryJpa implements AuthorRepository {
 
@@ -39,15 +35,16 @@ public class AuthorRepositoryJpa implements AuthorRepository {
 
     @Override
     public void deleteAuthorById(long id) {
-        Query query =
-                em.createQuery("DELETE FROM Author a WHERE a.id = :id");
-        query.setParameter("id", id);
-        query.executeUpdate();
+        Author author = em.find(Author.class, id);
+        em.remove(author);
     }
 
     @Override
     public List<Author> findAll() {
-        return em.createQuery("SELECT a FROM Author a LEFT JOIN a.books GROUP BY a", Author.class).getResultList();
+        EntityGraph<?> entityGraph = em.createEntityGraph("author-book-entity-graph");
+        TypedQuery<Author> query = em.createQuery("SELECT a FROM Author a", Author.class);
+        query.setHint("javax.persistence.fetchgraph", entityGraph);
+        return query.getResultList();
     }
 
     @Override

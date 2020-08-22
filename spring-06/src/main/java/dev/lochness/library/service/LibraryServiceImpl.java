@@ -10,14 +10,13 @@ import dev.lochness.library.repository.BookRepository;
 import dev.lochness.library.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
 public class LibraryServiceImpl implements LibraryService {
 
     private final Printer printer;
@@ -35,6 +34,7 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public void listBooks() {
         List<Book> books = bookRepository.findAll();
         for (Book book : books) {
@@ -43,11 +43,13 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public void printBookInfo(long bookId) {
         printer.printBookInfo(bookRepository.findBookById(bookId), true);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public void listAuthors() {
         List<Author> authors = authorRepository.findAll();
         for (Author author : authors) {
@@ -56,6 +58,7 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public void listGenres() {
         List<Genre> genres = genreRepository.findAll();
         for (Genre genre : genres) {
@@ -64,16 +67,19 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
     @Override
+    @Transactional
     public Book addBook(Book book) {
         return bookRepository.saveBook(book);
     }
 
     @Override
+    @Transactional
     public void deleteBook(long id) {
         bookRepository.deleteBookById(id);
     }
 
     @Override
+    @Transactional
     public void setBookGenres(long bookId, List<Long> genresId) {
         Book book = bookRepository.findBookById(bookId);
         List<Genre> genres = new ArrayList<>();
@@ -85,6 +91,7 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
     @Override
+    @Transactional
     public void setBookAuthors(long bookId, List<Long> authorsId) {
         Book book = bookRepository.findBookById(bookId);
         List<Author> authors = new ArrayList<>();
@@ -97,39 +104,44 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public void printBooksByGenre(long genreId) {
         printer.printGenre(genreRepository.findGenreById(genreId), true);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public void printBooksByAuthor(long authorId) {
         Optional<Author> author = authorRepository.findAuthorById(authorId);
-        if (author.isPresent()) {
-            printer.printAuthor(author.get(), true);
-        }
+        author.ifPresent(value -> printer.printAuthor(value, true));
     }
 
     @Override
+    @Transactional
     public Genre addGenre(Genre genre) {
         return genreRepository.saveGenre(genre);
     }
 
     @Override
+    @Transactional
     public Author addAuthor(Author author) {
         return authorRepository.saveAuthor(author);
     }
 
     @Override
+    @Transactional
     public void deleteGenre(long genreId) {
         genreRepository.deleteGenreById(genreId);
     }
 
     @Override
+    @Transactional
     public void deleteAuthor(long authorId) {
         authorRepository.deleteAuthorById(authorId);
     }
 
     @Override
+    @Transactional
     public void updateBook(long bookId, String title, String isbn) {
         Book book = bookRepository.findBookById(bookId);
         book.setTitle(title);
@@ -138,6 +150,7 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
     @Override
+    @Transactional
     public void addComment(long bookId, Comment comment) {
         Book book = bookRepository.findBookById(bookId);
         book.getComments().add(comment);

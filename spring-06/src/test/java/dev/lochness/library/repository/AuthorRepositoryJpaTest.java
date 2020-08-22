@@ -9,7 +9,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.annotation.DirtiesContext;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,7 +41,10 @@ class AuthorRepositoryJpaTest {
     @Test
     @DirtiesContext
     void shouldAddAuthorsCorrectly() {
-        Author addedAuthor = authorRepository.saveAuthor(new Author(TEST_USER_FIRST_NAME, TEST_USER_LAST_NAME));
+        Author addedAuthor = authorRepository.saveAuthor(Author.builder()
+                .firstName(TEST_USER_FIRST_NAME)
+                .lastName(TEST_USER_LAST_NAME)
+                .build());
         Author author = em.find(Author.class, EXPECTED_NEW_AUTHOR_ID);
         assertThat(addedAuthor).isNotNull().isEqualToComparingFieldByField(author);
     }
@@ -59,7 +61,10 @@ class AuthorRepositoryJpaTest {
     @DirtiesContext
     void shouldReturnAllAuthors() {
         Author defaultAuthor = em.find(Author.class, DEFAULT_AUTHOR_ID);
-        Author addedAuthor = new Author(0L, TEST_USER_FIRST_NAME, TEST_USER_LAST_NAME, new ArrayList<>());
+        Author addedAuthor = Author.builder()
+                .firstName(TEST_USER_FIRST_NAME)
+                .lastName(TEST_USER_LAST_NAME)
+                .build();
         em.persist(addedAuthor);
         assertThat(authorRepository.findAll()).isNotNull().hasSize(EXPECTED_NUMBER_OF_AUTHORS + 1)
                 .containsAll(List.of(defaultAuthor, addedAuthor));
