@@ -16,7 +16,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Class AuthorRepositoryJpa")
 @DataJpaTest
-@Import(AuthorRepository.class)
 class AuthorRepositoryJpaTest {
 
     private static final String TEST_USER_FIRST_NAME = "Sam";

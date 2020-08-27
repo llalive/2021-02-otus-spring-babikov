@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.context.annotation.Import;
 import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.ArrayList;
@@ -20,7 +19,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("Class BookRepositoryJpa")
 @DataJpaTest
-@Import(BookRepository.class)
 class BookRepositoryJpaTest {
 
     private static final String TEST_BOOK_TITLE = "Test book";
