@@ -1,0 +1,12 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost
+      database: library
+      port: 27017
+  shell:
+    interactive:
+      enabled: true
+logging:
+  level:
+    ROOT: ERROR
