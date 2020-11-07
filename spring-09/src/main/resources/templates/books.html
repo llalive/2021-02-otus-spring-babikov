@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Библиотека | Список книг</title>
+</head>
+<body>
+    <table class="books">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Название</th>
+            <th>Авторы</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.id}">1</td>
+            <td th:text="${book.title}">"Война и мир"</td>
+            <td th:text="${book.authors}">Л.Н.Толстой</td>
+            <td>
+                <a th:href="@{/book/{bookId}(bookId=${book.id})}" href="details.html">Просмотр</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

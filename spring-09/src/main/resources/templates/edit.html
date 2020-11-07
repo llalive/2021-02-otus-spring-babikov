@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Библиотека | Редактирование книги</title>
+</head>
+<body>
+    <form id="book_edit" th:action="@{/book/{bookId}/edit(bookId=${book.id})}" method="post" th:object="${book}">
+        <h1>Заполните информацию по книге:</h1>
+        <div class="row">
+            <label for="book_title">Название</label>
+            <input id="book_title" type="text"
+                name="title"
+                th:value="*{title}">
+        </div>
+        <div class="row">
+            <label for="book_authors">Автор</label>
+            <input id="book_authors" type="text"
+                   name="authors"
+                   th:value="*{authors}">
+        </div>
+        <div class="row">
+            <label for="book_genres">Жанр</label>
+            <input id="book_genres" type="text"
+                   name="genres"
+                   th:value="*{genres}">
+        </div>
+        <div class="row">
+            <label for="book_isbn">ISBN</label>
+            <input id="book_isbn" type="text"
+                   name="isbn"
+                   th:value="*{isbn}">
+        </div>
+        <div>
+            <input type="hidden" id="book_id" name="id" th:value="*{id}">
+        </div>
+        <div class="row">
+            <button type="submit">Save</button>
+        </div>
+    </form>
+    <div class="edit_result" th:if="${isSaved}">
+        Книга сохранена успешно!
+    </div>
+</body>
+</html>
