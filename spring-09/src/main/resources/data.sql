@@ -15,3 +15,5 @@ INSERT INTO book_authors(`book_id`, `author_id`)
 VALUES (1, 1), (2, 2);
 INSERT INTO book_genres(`book_id`, `genre_id`)
 VALUES (1, 3), (1, 6), (2, 4);
+INSERT INTO comments(`commented_by`, `text`, `book_id`)
+VALUES ('Генри Форд', 'Прочёл на одном дыхании!', 2), ('Карл Маркс', 'Не впечатлило!', 1);

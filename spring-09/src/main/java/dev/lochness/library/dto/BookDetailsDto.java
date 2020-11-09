@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @Builder
 @AllArgsConstructor
 public class BookDetailsDto {
-    private long id;
+    private Long id;
     private String title;
     private String authors;
     private String isbn;
@@ -44,7 +44,7 @@ public class BookDetailsDto {
                 .title(bookDto.getTitle())
                 .authors(parseAuthors(bookDto.getAuthors()))
                 .genres(Arrays.stream(bookDto.genres.split(",")).map(s ->
-                        Genre.builder().name(s).build()).collect(Collectors.toList()))
+                        Genre.builder().name(s.trim()).build()).collect(Collectors.toList()))
                 .isbn(bookDto.getIsbn())
                 .build();
     }

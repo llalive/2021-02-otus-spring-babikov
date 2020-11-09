@@ -1,6 +1,8 @@
 package dev.lochness.library.service;
 
+import dev.lochness.library.domain.Author;
 import dev.lochness.library.domain.Book;
+import dev.lochness.library.domain.Genre;
 import dev.lochness.library.dto.BookBriefDto;
 import dev.lochness.library.dto.BookDetailsDto;
 
@@ -14,8 +16,14 @@ public interface LibraryService {
     Optional<BookDetailsDto> getBookById(Long id);
 
     Book updateBook(Book book);
-/*
-    void listBooks();
+
+    void deleteBook(Long id);
+
+    List<Genre> getGenres();
+
+    List<Author> getAuthors();
+
+    /*void listBooks();
 
     void listAuthors();
 
@@ -24,8 +32,6 @@ public interface LibraryService {
     void printBookInfo(long id);
 
     Book addBook(Book book);
-
-    void deleteBook(long id);
 
     void setBookGenres(long bookId, List<Long> genres);
 

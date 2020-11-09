@@ -15,7 +15,7 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comment_id", nullable = false, unique = true)
-    private long id;
+    private Long id;
 
     @Column(name = "commented_by")
     private String commentedBy;

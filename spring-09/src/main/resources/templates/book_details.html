@@ -29,7 +29,7 @@
     </tr>
     <tr>
         <td colspan="2">
-            <a th:href="@{/book/{bookId}/edit(bookId=${book.id})}" href="edit.html">Редактировать</a>
+            <a th:href="@{/book/{bookId}/edit(bookId=${book.id})}" href="book_edit.html">Редактировать</a>
             <a href="/">Назад</a>
         </td>
     </tr>
@@ -47,7 +47,9 @@
     </tr>
     </tbody>
     <tbody th:if="${book.comments.isEmpty()}">
-        <tr><td>Эту книгу ещё никто не комментировал.</td></tr>
+    <tr>
+        <td>Эту книгу ещё никто не комментировал.</td>
+    </tr>
     </tbody>
 </table>
 </body>

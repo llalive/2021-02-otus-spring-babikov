@@ -1,6 +1,8 @@
 package dev.lochness.library.service;
 
+import dev.lochness.library.domain.Author;
 import dev.lochness.library.domain.Book;
+import dev.lochness.library.domain.Genre;
 import dev.lochness.library.dto.BookBriefDto;
 import dev.lochness.library.dto.BookDetailsDto;
 import dev.lochness.library.repository.AuthorRepository;
@@ -53,7 +55,33 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Override
     public Book updateBook(Book book) {
+        List<Genre> genres = book.getGenres().stream().map(genre -> {
+            Optional<Genre> genreExisted = genreRepository.findByName(genre.getName());
+            return genreExisted.orElse(genre);
+        }).collect(Collectors.toList());
+        book.setGenres(genres);
+        List<Author> authors = book.getAuthors().stream().map(author -> {
+            Optional<Author> authorExisted = authorRepository.findByFirstNameAndLastName(
+                    author.getFirstName(), author.getLastName());
+            return authorExisted.orElse(author);
+        }).collect(Collectors.toList());
+        book.setAuthors(authors);
         return bookRepository.save(book);
+    }
+
+    @Override
+    public void deleteBook(Long id) {
+        bookRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Genre> getGenres() {
+        return genreRepository.findAll();
+    }
+
+    @Override
+    public List<Author> getAuthors() {
+        return authorRepository.findAll();
     }
 
     /*@Autowired

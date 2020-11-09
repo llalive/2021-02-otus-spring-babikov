@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Builder
 @AllArgsConstructor
 public class BookBriefDto {
-    private long id;
+    private Long id;
     private String title;
     private String authors;
 
