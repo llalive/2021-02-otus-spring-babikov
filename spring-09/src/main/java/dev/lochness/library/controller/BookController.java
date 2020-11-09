@@ -45,7 +45,7 @@ public class BookController {
     @PostMapping("/book/{bookId}/edit")
     public String submitBookEdit(BookDetailsDto book, Model model) {
         Book savedBook = libraryService.updateBook(BookDetailsDto.toBook(book));
-        model.addAttribute("book", savedBook);
+        model.addAttribute("book", BookDetailsDto.toDto(savedBook));
         model.addAttribute("isSaved", Boolean.TRUE);
         return "edit";
     }

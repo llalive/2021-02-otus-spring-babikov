@@ -45,6 +45,7 @@ public class BookDetailsDto {
                 .authors(parseAuthors(bookDto.getAuthors()))
                 .genres(Arrays.stream(bookDto.genres.split(",")).map(s ->
                         Genre.builder().name(s).build()).collect(Collectors.toList()))
+                .isbn(bookDto.getIsbn())
                 .build();
     }
 
