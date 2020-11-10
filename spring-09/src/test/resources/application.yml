@@ -1,4 +1,4 @@
-books-per-page-count: 10
+books-per-page-count: 1
 
 spring:
   datasource:

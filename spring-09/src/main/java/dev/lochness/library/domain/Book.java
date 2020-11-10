@@ -32,12 +32,12 @@ public class Book {
     @Column(name = "isbn", unique = true)
     private String isbn;
 
-    @ManyToMany(targetEntity = Author.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(targetEntity = Author.class, fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(name = "book_authors", joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
     private List<Author> authors;
 
-    @ManyToMany(targetEntity = Genre.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(targetEntity = Genre.class, fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinTable(name = "book_genres", joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private List<Genre> genres;

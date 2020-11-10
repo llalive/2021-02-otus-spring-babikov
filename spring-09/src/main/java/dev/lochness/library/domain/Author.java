@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @Builder
@@ -14,8 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "authors")
-@NamedEntityGraph(name = "author-book-entity-graph",
-        attributeNodes = {@NamedAttributeNode("books")})
 public class Author {
 
     @Id
@@ -28,9 +25,6 @@ public class Author {
 
     @Column(name = "last_name", nullable = false)
     private String lastName;
-
-    @ManyToMany(mappedBy = "authors", targetEntity = Book.class)
-    private List<Book> books;
 
     public String getFullName() {
         return String.join(" ", firstName, lastName);

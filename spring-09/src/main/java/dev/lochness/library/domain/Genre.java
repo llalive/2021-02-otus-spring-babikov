@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @Builder
@@ -14,8 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "genres")
-@NamedEntityGraph(name = "genre-book-entity-graph",
-        attributeNodes = {@NamedAttributeNode("books")})
 public class Genre {
 
     @Id
@@ -25,7 +22,4 @@ public class Genre {
 
     @Column(name = "name", nullable = false, unique = true)
     private String name;
-
-    @ManyToMany(mappedBy = "genres", targetEntity = Book.class)
-    private List<Book> books;
 }

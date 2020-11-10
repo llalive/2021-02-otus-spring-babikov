@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface LibraryService {
 
-    List<BookBriefDto> getBooksWithOffset(int offset);
+    List<BookBriefDto> getBooksWithOffset(int page);
 
     Optional<BookDetailsDto> getBookById(Long id);
 

@@ -1,21 +1,27 @@
 package dev.lochness.library.service;
 
+import dev.lochness.library.domain.Book;
+import dev.lochness.library.dto.BookBriefDto;
+import dev.lochness.library.repository.AuthorRepository;
+import dev.lochness.library.repository.BookRepository;
+import dev.lochness.library.repository.GenreRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @DisplayName("Class LibraryServiceImpl")
 class LibraryServiceImplTest {
-/*
-    private static final String TEST_BOOK_TITLE = "Test book";
-    private static final String TEST_BOOK_ISBN = "0123456789";
-    private static final String TEST_AUTHOR_FIRST_NAME = "Sam";
-    private static final String TEST_AUTHOR_LAST_NAME = "Sepiol";
-    private static final String COMMENT_AUTHOR = "Charles Dickens";
-    private static final String COMMENT_TEXT = "I can do better";
-
-    @MockBean
-    private Printer printer;
 
     @Autowired
     private BookRepository bookRepository;
@@ -29,95 +35,50 @@ class LibraryServiceImplTest {
     @Autowired
     private LibraryService service;
 
+    @Value("${books-per-page-count}")
+    private int booksPerPage;
+
     @Test
-    void shouldPrintOneBook() {
-        service.listBooks();
-        verify(printer, times(1)).printBookInfo(any(Book.class), eq(false));
+    void shouldReturnCorrectNumberOfBooks() {
+        List<BookBriefDto> booksWithOffset = service.getBooksWithOffset(1);
+        Assertions.assertEquals(booksPerPage, booksWithOffset.size());
     }
 
     @Test
-    void shouldPrintBookInfo() {
-        service.printBookInfo(1);
-        verify(printer, times(1)).printBookInfo(any(Book.class), eq(true));
-    }
-
-    @Test
-    void shouldPrintOneAuthor() {
-        service.listAuthors();
-        verify(printer, times(1)).printAuthor(any(Author.class), eq(false));
-    }
-
-    @Test
-    void shouldPrintAllGenres() {
-        service.listGenres();
-        verify(printer, times(8)).printGenre(any(Genre.class), eq(false));
+    void shouldNotReturnAnyBooksForIncorrectPage() {
+        List<BookBriefDto> booksWithOffset = service.getBooksWithOffset(5);
+        Assertions.assertEquals(0, booksWithOffset.size());
     }
 
     @Test
     @DirtiesContext
-    @Transactional
-    void shouldAddBooksCorrectly() {
+    void shouldAddBookCorrectly() {
+        long booksCount = bookRepository.count();
         Book book = Book.builder()
-                .title(TEST_BOOK_TITLE)
-                .isbn(TEST_BOOK_ISBN)
+                .title("Title")
+                .genres(new ArrayList<>())
+                .authors(new ArrayList<>())
                 .build();
-        service.addBook(book);
-        Optional<Book> addedBook = bookRepository.findById(2L);
-        assertTrue(addedBook.isPresent() && addedBook.get().equals(book));
+        service.updateBook(book);
+        assertEquals(booksCount + 1, bookRepository.count());
     }
 
     @Test
     @DirtiesContext
-    void shouldCorrectlyDeleteBookFromLibrary() {
-        service.deleteBook(1);
-        assertEquals(0, bookRepository.count());
+    void shouldRemoveBookCorrectly() {
+        Book book = bookRepository.findAll().get(0);
+        service.deleteBook(book.getId());
+        Optional<Book> expected = bookRepository.findById(book.getId());
+        Assertions.assertTrue(expected.isEmpty());
     }
 
     @Test
-    @DirtiesContext
-    @Transactional
-    void shouldSetBookGenresCorrectly() {
-        var id = List.of(1L, 3L);
-        service.setBookGenres(1, id);
-        var book = bookRepository.findById(1L);
-        assertTrue(book.isPresent() &&
-                book.get().getGenres().containsAll(genreRepository.findAllById(id)));
+    void shouldReturnAllGenres() {
+        Assertions.assertArrayEquals(genreRepository.findAll().toArray(), service.getGenres().toArray());
     }
 
     @Test
-    @DirtiesContext
-    @Transactional
-    void shouldSetBookAuthorsCorrectly() {
-        var author = authorRepository.save(Author.builder()
-                .firstName(TEST_AUTHOR_FIRST_NAME)
-                .lastName(TEST_AUTHOR_LAST_NAME)
-                .build());
-        service.setBookAuthors(1, List.of(author.getId()));
-        var book = bookRepository.findById(1L);
-        assertTrue(book.isPresent()
-                && book.get().getAuthors().get(0).equals(author));
+    void shouldReturnAllAuthors() {
+        Assertions.assertArrayEquals(authorRepository.findAll().toArray(), service.getAuthors().toArray());
     }
-
-    @Test
-    @DirtiesContext
-    void shouldCorrectlyUpdateBookInfo() {
-        service.updateBook(1L, TEST_BOOK_TITLE, TEST_BOOK_ISBN);
-        var book = bookRepository.findById(1L);
-        assertTrue(book.isPresent()
-                && book.get().getTitle().equals(TEST_BOOK_TITLE)
-                && book.get().getIsbn().equals(TEST_BOOK_ISBN));
-    }
-
-    @Test
-    @DirtiesContext
-    @Transactional
-    void shouldCorrectlyAddCommentsForBook() {
-        var comment = new Comment(0L, COMMENT_AUTHOR, COMMENT_TEXT);
-        service.addComment(1L, comment);
-        var book = bookRepository.findById(1L);
-        assertTrue(book.isPresent() && !book.get().getComments().isEmpty()
-                && book.get().getComments().get(0).getCommentedBy().equals(COMMENT_AUTHOR)
-                && book.get().getComments().get(0).getText().equals(COMMENT_TEXT));
-
-    }*/
 }

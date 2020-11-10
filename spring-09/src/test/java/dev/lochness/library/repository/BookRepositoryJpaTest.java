@@ -59,7 +59,7 @@ class BookRepositoryJpaTest {
                 .lastName(TEST_AUTHOR_LAST_NAME)
                 .build());
         expected.setAuthors(authors);
-        expected.getGenres().add(new Genre(0L, TEST_GENRE_NAME, new ArrayList<>()));
+        expected.getGenres().add(new Genre(0L, TEST_GENRE_NAME));
         bookRepository.save(expected);
         Optional<Book> actual = bookRepository.findById(DEFAULT_BOOK_ID);
         assertThat(actual).isPresent().get().isEqualToComparingFieldByField(expected);

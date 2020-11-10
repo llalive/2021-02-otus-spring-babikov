@@ -19,21 +19,23 @@ public class BookController {
     private final LibraryService libraryService;
 
     @GetMapping("/")
-    public String listBooks(@RequestParam(value = "offset", defaultValue = "0") int offset, Model model) {
-        model.addAttribute("books", libraryService.getBooksWithOffset(offset));
+    public String listBooks(@RequestParam(value = "offset", defaultValue = "0") int page, Model model) {
+        model.addAttribute("books", libraryService.getBooksWithOffset(page));
         return "books";
     }
 
     @GetMapping("/book/{bookId}")
     public String getBookDetails(@PathVariable Long bookId, Model model) {
-        BookDetailsDto book = libraryService.getBookById(bookId).orElseThrow(NotFoundException::new);
+        BookDetailsDto book = libraryService.getBookById(bookId).orElseThrow(()
+                -> new NotFoundException("Книга не найдена"));
         model.addAttribute("book", book);
         return "book_details";
     }
 
     @GetMapping("/book/{bookId}/edit")
     public String getBookEditPage(@PathVariable Long bookId, Model model) {
-        BookDetailsDto book = libraryService.getBookById(bookId).orElseThrow(NotFoundException::new);
+        BookDetailsDto book = libraryService.getBookById(bookId).orElseThrow(()
+                -> new NotFoundException("Книга не найдена"));
         model.addAttribute("book", book);
         return "book_edit";
     }
