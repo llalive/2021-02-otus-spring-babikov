@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.context.annotation.Import;
 import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.List;
@@ -20,9 +19,9 @@ class AuthorRepositoryJpaTest {
 
     private static final String TEST_USER_FIRST_NAME = "Sam";
     private static final String TEST_USER_LAST_NAME = "Sepiol";
-    private static final long EXPECTED_NEW_AUTHOR_ID = 2L;
+    private static final long EXPECTED_NEW_AUTHOR_ID = 3L;
     private static final long DEFAULT_AUTHOR_ID = 1L;
-    private static final int EXPECTED_NUMBER_OF_AUTHORS = 1;
+    private static final int EXPECTED_NUMBER_OF_AUTHORS = 2;
 
     @Autowired
     private AuthorRepository authorRepository;

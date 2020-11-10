@@ -28,7 +28,7 @@ class BookRepositoryJpaTest {
     private static final String TEST_GENRE_NAME = "фэнтези";
     private static final String DEFAULT_BOOK_TITLE = "Молчание ягнят";
     private static final long DEFAULT_BOOK_ID = 1L;
-    private static final long EXPECTED_ADDED_BOOK_ID = 2L;
+    private static final long EXPECTED_ADDED_BOOK_ID = 3L;
 
     @Autowired
     private BookRepository bookRepository;
@@ -59,7 +59,7 @@ class BookRepositoryJpaTest {
                 .lastName(TEST_AUTHOR_LAST_NAME)
                 .build());
         expected.setAuthors(authors);
-        expected.getGenres().add(new Genre(0L, TEST_GENRE_NAME));
+        expected.getGenres().add(Genre.builder().name(TEST_GENRE_NAME).build());
         bookRepository.save(expected);
         Optional<Book> actual = bookRepository.findById(DEFAULT_BOOK_ID);
         assertThat(actual).isPresent().get().isEqualToComparingFieldByField(expected);
@@ -79,6 +79,6 @@ class BookRepositoryJpaTest {
                 .isbn(TEST_BOOK_ISBN)
                 .build());
         List<Book> books = bookRepository.findAll();
-        assertEquals(2, books.size());
+        assertEquals(3, books.size());
     }
 }
