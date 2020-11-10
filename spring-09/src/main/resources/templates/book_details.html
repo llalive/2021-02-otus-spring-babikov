@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Библиотека | Подробное описание книги</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<table class="book_details">
+<table id="book_details">
     <tbody>
     <tr>
         <th>ID</th>
         <td th:text="${book.id}">1</td>
+        <td rowspan="5">
+            <a th:href="@{/book/{bookId}/edit(bookId=${book.id})}" href="book_edit.html">Редактировать</a>
+            <a href="/">Назад</a>
+        </td>
     </tr>
     <tr>
         <th>Название</th>
@@ -27,27 +32,20 @@
         <th>ISBN</th>
         <td th:text="${book.isbn}">000-0000-00</td>
     </tr>
-    <tr>
-        <td colspan="2">
-            <a th:href="@{/book/{bookId}/edit(bookId=${book.id})}" href="book_edit.html">Редактировать</a>
-            <a href="/">Назад</a>
-        </td>
-    </tr>
     </tbody>
 </table>
-<hr>
 <table class="comments">
     <thead>
     <th>Комментарии:</th>
     </thead>
-    <tbody th:if="${!book.comments.isEmpty()}">
+    <tbody>
     <tr th:each="comment : ${book.comments}">
-        <b th:text="${comment.getCommentedBy()}">А.С.Пушкин</b>
-        <i th:text="${comment.getText()}">Выпьем с горя!</i>
+        <td>
+            <span class="commented_by" th:text="${comment.getCommentedBy()}">А.С.Пушкин</span>
+            <span class="comment_text" th:text="${comment.getText()}">Выпьем с горя!</span>
+        </td>
     </tr>
-    </tbody>
-    <tbody th:if="${book.comments.isEmpty()}">
-    <tr>
+    <tr th:if="${book.comments.isEmpty()}">
         <td>Эту книгу ещё никто не комментировал.</td>
     </tr>
     </tbody>

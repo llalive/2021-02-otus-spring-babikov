@@ -16,7 +16,7 @@ public class BookBriefDto {
     private String title;
     private String authors;
 
-    public static BookBriefDto toDto(Book book){
+    public static BookBriefDto toDto(Book book) {
         return BookBriefDto.builder()
                 .id(book.getId())
                 .title(book.getTitle())

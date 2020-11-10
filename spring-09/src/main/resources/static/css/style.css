@@ -1,0 +1,91 @@
+body {
+    font-family: Verdana;
+}
+
+table {
+    text-decoration: none;
+    border-collapse: collapse;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+table th {
+    font-weight: normal;
+    font-size: 18px;
+    color: #ffffff;
+    background-color: #354251;
+    max-width: 30px;
+}
+
+table td {
+    font-size: 15px;
+    color: #354251;
+}
+
+table td, table th {
+    white-space: pre-wrap;
+    padding: 10px 5px;
+    line-height: 13px;
+    vertical-align: middle;
+    border: 1px solid #354251;
+}
+
+table tr:hover td {
+    color: #607D8B;
+    cursor: default;
+}
+
+a {
+    display: inline-block;
+    padding: 3px 5px;
+    font-size: 15px;
+    color: #0723c7;
+}
+
+.commented_by {
+    font-weight: bold;
+    color: #b90606;
+}
+
+.comment_text {
+    padding: 2px 0px;
+    display: inline-block;
+}
+
+.row {
+    padding: 3px;
+}
+
+.row label {
+    width: 100px;
+    display: inline-block;
+}
+
+h1 {
+    font-size: 16px;
+}
+
+form {
+    border: 1px solid black;
+    width: 360px;
+    padding: 30px;
+}
+
+button {
+    font-size: 15px;
+    margin: 5px 0px 0px 0px;
+    background-color: white;
+    padding: 5px 10px;
+}
+
+button:hover {
+    background-color: #e8f0fe;
+    cursor: pointer;
+}
+
+input {
+    border: 1px solid black;
+    padding: 6px;
+    font-size: 14px;
+}

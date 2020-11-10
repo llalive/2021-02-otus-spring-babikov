@@ -32,7 +32,7 @@ public class Author {
     @ManyToMany(mappedBy = "authors", targetEntity = Book.class)
     private List<Book> books;
 
-    public String getFullName(){
+    public String getFullName() {
         return String.join(" ", firstName, lastName);
     }
 }

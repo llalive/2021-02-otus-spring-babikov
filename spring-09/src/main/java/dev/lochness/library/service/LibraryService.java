@@ -22,34 +22,4 @@ public interface LibraryService {
     List<Genre> getGenres();
 
     List<Author> getAuthors();
-
-    /*void listBooks();
-
-    void listAuthors();
-
-    void listGenres();
-
-    void printBookInfo(long id);
-
-    Book addBook(Book book);
-
-    void setBookGenres(long bookId, List<Long> genres);
-
-    void setBookAuthors(long bookId, List<Long> authors);
-
-    void printBooksByGenre(long genreId);
-
-    void printBooksByAuthor(long authorId);
-
-    Genre addGenre(Genre genre);
-
-    Author addAuthor(Author author);
-
-    void deleteGenre(long genreId);
-
-    void deleteAuthor(long authorId);
-
-    void updateBook(long bookId, String title, String isbn);
-
-    void addComment(long bookId, Comment comment);*/
 }

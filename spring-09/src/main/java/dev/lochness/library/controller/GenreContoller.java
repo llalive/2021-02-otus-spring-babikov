@@ -13,7 +13,7 @@ public class GenreContoller {
     private final LibraryService libraryService;
 
     @GetMapping("/genre/")
-    public String listGenres(Model model){
+    public String listGenres(Model model) {
         model.addAttribute("genres", libraryService.getGenres());
         return "genres";
     }

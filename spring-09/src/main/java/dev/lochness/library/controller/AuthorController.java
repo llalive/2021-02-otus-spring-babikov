@@ -12,7 +12,7 @@ public class AuthorController {
     private final LibraryService libraryService;
 
     @GetMapping("/author/")
-    public String listGenres(Model model){
+    public String listGenres(Model model) {
         model.addAttribute("authors", libraryService.getAuthors());
         return "authors";
     }

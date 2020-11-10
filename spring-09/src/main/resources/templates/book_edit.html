@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Библиотека | Редактирование книги</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <form id="book_edit" th:action="@{/book/{bookId}/edit(bookId=${book.id})}" method="post" th:object="${book}">
