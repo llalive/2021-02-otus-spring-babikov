@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Библиотека | Подробное описание книги</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<table id="book_details">
+    <tbody>
+    <tr>
+        <th>ID</th>
+        <td th:text="${book.id}">1</td>
+        <td rowspan="5">
+            <a th:href="@{/book/{bookId}/edit(bookId=${book.id})}" href="book_edit.html">Редактировать</a>
+            <a href="/">Назад</a>
+        </td>
+    </tr>
+    <tr>
+        <th>Название</th>
+        <td th:text="${book.title}">"Война и мир"</td>
+    </tr>
+    <tr>
+        <th>Авторы</th>
+        <td th:text="${book.authors}">Л.Н.Толстой</td>
+    </tr>
+    <tr>
+        <th>Жанры</th>
+        <td th:text="${book.genres}">Роман</td>
+    </tr>
+    <tr>
+        <th>ISBN</th>
+        <td th:text="${book.isbn}">000-0000-00</td>
+    </tr>
+    </tbody>
+</table>
+<table class="comments">
+    <thead>
+    <th>Комментарии:</th>
+    </thead>
+    <tbody>
+    <tr th:each="comment : ${book.comments}">
+        <td>
+            <span class="commented_by" th:text="${comment.getCommentedBy()}">А.С.Пушкин</span>
+            <span class="comment_text" th:text="${comment.getText()}">Выпьем с горя!</span>
+        </td>
+    </tr>
+    <tr th:if="${book.comments.isEmpty()}">
+        <td>Эту книгу ещё никто не комментировал.</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
