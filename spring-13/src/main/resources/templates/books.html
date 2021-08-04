@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Библиотека | Список книг</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+</head>
+<body>
+<table id="books">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Авторы</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${books.isEmpty()}">
+        <td colspan="4">Нет книг для просмотра</td>
+    </tr>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.id}">1</td>
+        <td th:text="${book.title}">"Война и мир"</td>
+        <td th:text="${book.authors}">Л.Н.Толстой</td>
+        <td>
+            <a th:href="@{/book/{bookId}(bookId=${book.id})}" href="book_details.html">Просмотр</a>
+            <a th:href="@{/book/{bookId}/delete(bookId=${book.id})}">Удалить</a>
+        </td>
+    </tr>
+    <tr><a href="#genres" id="genres_link">Список жанров</a> |
+        <a href="#authors" id="authors_link">Список авторов</a> |
+        <span sec:authorize="hasAuthority('ADMIN')">
+            <a href="/book/add">Добавить книгу</a> |
+        </span>
+        <a sec:authorize="isAnonymous()" href="/login">Авторизоваться</a>
+        <a sec:authorize="isAuthenticated()" href="/logout">Выйти</a>
+    </tr>
+    </tbody>
+    <div id="popup">
+        <span id="popup_close_btn">[x]</span>
+        <div id="popup_data"></div>
+    </div>
+</table>
+</body>
+</html>
