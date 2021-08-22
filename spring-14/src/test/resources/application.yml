@@ -1,0 +1,30 @@
+spring:
+  batch:
+    initializer:
+      enabled: true
+    job:
+      enabled: true
+    jdbc:
+      initialize-schema: always
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+      dialect: org.hibernate.dialect.MySQL5Dialect
+    generate-ddl: true
+    show-sql: true
+    database: mysql
+  datasource:
+    url: jdbc:tc:mysql:5.7.34:///test??TC_INITSCRIPT=schema.sql
+    username: test
+    password: test
+    driverClassName: org.testcontainers.jdbc.ContainerDatabaseDriver
+
+job:
+  reports:
+    chunkSize: 1000
+    filter: ALL
+    outputFileName: actual-test-report.xlsx
+
+logging:
+  level:
+    root: INFO
