@@ -1,0 +1,28 @@
+spring:
+  batch:
+    initializer:
+      enabled: false
+    job:
+      enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.HSQLDialect
+    generate-ddl: true
+    show-sql: true
+    database: mysql
+  datasource:
+  #    url: jdbc:mysql://host/db?createDatabaseIfNotExist=false&characterEncoding=utf8
+  #    username:
+  #    password:
+    driverClassName: com.mysql.cj.jdbc.Driver
+
+job:
+  reports:
+    chunksize: 1000
+    filter: PREV_MONTH
+    outputFileName: /tmp/monthly_report.xlsx
+
+logging:
+  level:
+    root: error
