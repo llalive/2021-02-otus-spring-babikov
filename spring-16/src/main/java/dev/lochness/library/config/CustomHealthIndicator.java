@@ -14,14 +14,10 @@ import org.springframework.boot.actuate.health.Status;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.EntityManager;
-
 @Component
 @Configuration
 @RequiredArgsConstructor
 public class CustomHealthIndicator implements HealthIndicator {
-
-    private final EntityManager entityManager;
 
     @Value("${server.address}")
     private String address;
