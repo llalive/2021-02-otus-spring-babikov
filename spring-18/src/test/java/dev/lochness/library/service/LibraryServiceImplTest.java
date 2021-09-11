@@ -95,13 +95,4 @@ class LibraryServiceImplTest {
     void shouldReturnAllAuthors() {
         Assertions.assertArrayEquals(authorRepository.findAll().toArray(), service.getAuthors().toArray());
     }
-
-    @Test
-    @DirtiesContext
-    void shouldNotAllowToCallBookRemoveTwice() {
-        Book book = bookRepository.findAll().get(0);
-        service.deleteBook(book.getId());
-        Optional<Book> expected = bookRepository.findById(book.getId());
-        Assertions.assertTrue(expected.isEmpty());
-    }
 }
