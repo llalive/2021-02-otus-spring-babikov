@@ -1,0 +1,26 @@
+books-per-page-count: 1
+
+server:
+  address: 0.0.0.0
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:tc:postgresql:9.6.8:///library
+    initialization-mode: always
+    sql-script-encoding: UTF-8
+    spring.datasource.username: postgres
+    spring.datasource.password: postgres
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+
+logging:
+   level:
+     ROOT: ERROR
