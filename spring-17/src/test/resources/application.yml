@@ -6,7 +6,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:tc:postgresql:9.6.8:///library
+    url: jdbc:tc:postgresql:13.4:///library
     initialization-mode: always
     sql-script-encoding: UTF-8
     spring.datasource.username: postgres

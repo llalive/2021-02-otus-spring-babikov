@@ -18,7 +18,7 @@ services:
       - shared-network
   postgres:
     container_name: "library_db"
-    image: "library/postgres:latest"
+    image: "library/postgres:13.4"
     ports:
       - "5432:5432"
     environment:
@@ -27,9 +27,6 @@ services:
       - POSTGRES_DB=library
     networks:
       - shared-network
-
-volumes:
-  postgres_data:
 
 networks:
   shared-network:
