@@ -1,0 +1,51 @@
+books-per-page-count: 10
+
+server:
+  address: 0.0.0.0
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/library
+    username: postgres
+    password: postgres
+    sql-script-encoding: UTF-8
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+    enabled-by-default: false
+
+  endpoint:
+    health:
+      show-details: always
+      enabled: true
+    logfile:
+      external-file: logs/app.log
+      enabled: true
+    prometheus:
+      enabled: true
+    shutdown:
+      enabled: true
+    metrics:
+      enabled: true
+
+  health:
+    defaults:
+      enabled: true
+
+logging:
+  level:
+    ROOT: DEBUG
+  file:
+    name: logs/app.log
