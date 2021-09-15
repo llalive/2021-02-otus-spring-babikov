@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Библиотека | Список жанров</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<table id="genres">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Название</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="genre : ${genres}">
+        <td th:text="${genre.id}">1</td>
+        <td th:text="${genre.name}">Фэнтези</td>
+    </tr>
+    <tr><a href="/">К списку книг</a></tr>
+    </tbody>
+</table>
+</body>
+</html>

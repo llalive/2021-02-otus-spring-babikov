@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Библиотека | Добавление книги</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<form id="book_add" th:action="@{/book/add}" method="post">
+    <h1>Заполните информацию по книге:</h1>
+    <div class="row">
+        <label for="book_title">Название</label>
+        <input id="book_title" type="text"
+               name="title">
+    </div>
+    <div class="row">
+        <label for="book_authors">Авторы</label>
+        <input id="book_authors" type="text"
+               name="authors">
+    </div>
+    <div class="row">
+        <label for="book_genres">Жанры</label>
+        <input id="book_genres" type="text"
+               name="genres">
+    </div>
+    <div class="row">
+        <label for="book_isbn">ISBN</label>
+        <input id="book_isbn" type="text"
+               name="isbn">
+    </div>
+    <div class="row">
+        <button type="submit">Добавить</button>
+    </div>
+    <div class="row">
+        <a href="/">К списку книг</a>
+    </div>
+</form>
+</body>
+</html>
