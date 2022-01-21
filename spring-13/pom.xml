@@ -18,7 +18,7 @@
         <java.version>11</java.version>
         <ehcache-core.version>2.6.11</ehcache-core.version>
         <webjars.version>3.3.1</webjars.version>
-        <h2.version>1.4.200</h2.version>
+        <h2.version>2.1.210</h2.version>
         <thymeleaf-extras.version>3.0.4.RELEASE</thymeleaf-extras.version>
     </properties>
 
